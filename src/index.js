@@ -31,7 +31,7 @@ ReactDOM.render(
   <Auth0Provider
     domain={config.domain}
     client_id={config.clientId}
-    redirect_uri={window.location.origin}
+    redirect_uri={'http://localhost:3000/dashboard'}
     onRedirectCallback={onRedirectCallback}
   >
     <ThemeProvider theme={theme}>

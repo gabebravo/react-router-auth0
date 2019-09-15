@@ -1,10 +1,13 @@
 import React from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
+import {
+  Button,
+  CssBaseline,
+  AppBar,
+  Toolbar,
+  Typography
+} from '@material-ui/core';
 import { withRouter, NavLink } from 'react-router-dom';
 import { useAuth0 } from '../auth/react-auth0-wrapper';
 
@@ -70,7 +73,7 @@ const useStyles = makeStyles(theme => ({
   buttonWrapper: {
     display: 'flex',
     alignItems: 'center',
-    width: '15%',
+    width: '20%',
     justifyContent: 'center',
     [theme.breakpoints.down('sm')]: {
       width: '49%',
@@ -79,19 +82,14 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-function Header({ headerText }) {
+function Header({ headerText, user }) {
   const classes = useStyles();
   const { isAuthenticated, logout } = useAuth0();
 
   return (
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar
-        position="fixed"
-        className={clsx(classes.appBar, {
-          [classes.appBarShift]: open
-        })}
-      >
+      <AppBar position="fixed" className={clsx(classes.appBar)}>
         <Toolbar>
           <div className={classes.toolbarWrapper}>
             <Typography variant="h6" noWrap>
@@ -103,8 +101,14 @@ function Header({ headerText }) {
           <div className={classes.buttonWrapper}>
             {isAuthenticated && (
               <>
-                <div style={{ fontSize: '1rem' }}>{user.displayName} | </div>
-                <Button onClick={() => logout()} color="inherit">
+                <div
+                  style={{ fontSize: '1rem', marginRight: '1rem' }}
+                >{`Hi, ${user.given_name}`}</div>
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={() => logout()}
+                >
                   LOG OUT
                 </Button>
               </>
